@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book.id), notice: 'You have created book successfully.'
     else
-      redirect_to book_path(@book.id), alert: 'You have created book failed.'
+      redirect_to books_path, flash: { error: @book.errors.full_messages }
     end
   end
 
@@ -33,7 +33,7 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to book_path(@book.id), notice: 'You have updated book successfully.'
     else
-      redirect_to book_path(@book.id), alert: 'You have updated book failed.'
+      render :edit
     end
   end
 

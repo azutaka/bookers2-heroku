@@ -1,5 +1,15 @@
 <main>
   <div class="container px-5 px-sm-0">
+    <% if flash[:error].present?  %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h3><%= flash[:error].count %> errors prohibited this obj from being saved:</h3><br>
+        <ul>
+        <% flash[:error].each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="row">
       <div class="col-md-3">
         <!-- User Info -->
