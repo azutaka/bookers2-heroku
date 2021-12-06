@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!,except: [:top]
+
   def new
       @book = Book.new
   end
@@ -15,8 +17,12 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
+    @books = Book.joins(:user).select('books.*, users.*')
+    #@books = Book.all.includes(:users)
     @books = Book.all
     @user = User.find(current_user.id)
+    #@users = User.includes(:books)
+    #@users = User.all.includes(:rbooks)
   end
 
   def show
